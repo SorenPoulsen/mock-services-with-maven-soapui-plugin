@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ServiceClient</artifactId>
+	<parent>
+		<groupId>com.sorenpoulsen</groupId>
+		<artifactId>ServiceMock</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<packaging>jar</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.sorenpoulsen</groupId>
+			<artifactId>ServiceResources</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>SmartBearPluginRepository</id>
+			<url>http://www.soapui.org/repository/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>port-allocator-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>allocate-ports</goal>
+						</goals>
+						<configuration>
+							<ports>
+								<port>
+									<name>mockport</name>
+								</port>
+							</ports>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>write-project-properties</goal>
+						</goals>
+						<configuration>
+							<outputFile>${project.build.outputDirectory}/test.properties</outputFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.smartbear.soapui</groupId>
+				<artifactId>soapui-maven-plugin</artifactId>
+				<version>5.4.0</version>
+				<executions>
+					<execution>
+						<configuration>
+							<projectFile>${basedir}/src/test/soapui/test-soapui-project.xml</projectFile>
+							<port>${mockport}</port>
+							<path>/testservice</path>
+							<mockService>testmock</mockService>
+							<noBlock>true</noBlock>
+						</configuration>
+						<goals>
+							<goal>mock</goal>
+						</goals>
+						<phase>process-test-classes</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
