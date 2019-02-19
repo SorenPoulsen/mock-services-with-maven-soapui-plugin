@@ -4,12 +4,14 @@ A Maven project that shows how generate a JAX-WS service client and test it agai
 
 ## Prerequisites
 
-Maven 3.5.0 installed and "mvn" on PATH.
+Maven 3.5.0 installed and "mvn" on PATH.  
 JDK 1.8 installed and JAVA_HOME pointing the the root folder of the JDK.
 
 ## Build and run test
+```
+git clone https://github.com/SorenPoulsen/mock-services-with-maven-soapui-plugin.git
+cd mock-services-with-maven-soapui-plugin/ServiceMock
+mvn clean test
+```
 
->git clone https://github.com/SorenPoulsen/mock-services-with-maven-soapui-plugin.git
->cd mock-services-with-maven-soapui-plugin/ServiceMock
->mvn clean test
 
