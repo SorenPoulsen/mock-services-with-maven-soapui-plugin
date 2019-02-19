@@ -23,9 +23,8 @@ public class ServiceTest {
 
 	@Before
 	public void readMockPort() {
-		InputStream is = this.getClass().getResourceAsStream("/test.properties");
-		java.util.Properties p = new Properties();
-		try {
+		Properties p = new Properties();
+		try (InputStream is = ServiceTest.class.getResourceAsStream("/test.properties")) {
 			p.load(is);
 		} catch (IOException e) {
 			Assert.fail();
