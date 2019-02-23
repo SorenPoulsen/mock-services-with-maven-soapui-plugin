@@ -2,6 +2,10 @@
 
 A Maven project that shows how generate a JAX-WS service client and test it against a mock service using the SOAPUI Maven plugin.
 
+## Website
+
+[https://sorenpoulsen.com/mock-services-for-maven-integration-tests-with-the-soapui-plugin](https://sorenpoulsen.com/mock-services-for-maven-integration-tests-with-the-soapui-plugin)
+
 ## Prerequisites
 
 Maven 3.5.0 installed and "mvn" on PATH.  
